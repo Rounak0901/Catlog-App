@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:my_app/models/catlog.dart';
+import 'package:my_app/widgets/item_widget.dart';
 
 import '../widgets/drawer.dart';
 
@@ -9,6 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -16,8 +19,13 @@ class HomePage extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: Center(
-        child: Text("Welcome"),
+      body: ListView.builder(
+        itemCount: dummyList.length,
+        itemBuilder: (context, index) {
+          return ItemWidget(
+            item: dummyList[index],
+          );
+        },
       ),
       drawer: MyDrawer(),
     );
